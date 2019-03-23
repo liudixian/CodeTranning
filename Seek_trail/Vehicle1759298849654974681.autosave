@@ -1,0 +1,53 @@
+class Vehicle{
+//变量
+ArrayList<PVector> history = new Array:List<PVector>();
+
+PVector positon;
+PVector velocity;
+PVector acceleration;
+float r;
+float maxforce;
+float maxspeed;
+
+  Vehicle(float x, float y ){
+      acceleration = new PVector(0,0);
+      velocity = new PVector(0,-2);
+      position = new PVector(x,y);
+      r = 6;
+      maxspeed = 4;
+      maxforce = 0.1;
+  }
+
+  void update(){
+      velocity.add(acceleration);
+      velocity.limit(maxspeed);
+      positon.add(velocity);
+      //加速度更新、清零
+      acceleration.mult(0);
+      //历史痕迹
+      history.add(positon.get());
+      if(history.size()>100) {
+          history.remove(0);
+      }
+  }
+  //作用力
+  void applyForce(PVector force){
+      acceleration.add(force);
+  }
+
+  void seek(PVector target){
+
+  }
+
+  void display(){
+
+  }
+
+  void setMaxForce(float m) {
+      maxforce = m;
+  }
+
+  void setMaxSpeed(float s){
+      maxspeed = s;
+  }
+}
